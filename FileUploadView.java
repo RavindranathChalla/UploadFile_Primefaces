@@ -1,5 +1,9 @@
 package com.bean;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import javax.faces.bean.ManagedBean;
 
 import org.primefaces.event.FileUploadEvent;
@@ -36,13 +40,28 @@ public class FileUploadView {
     this.uploadedFile = uploadedFile;
   }
 
-  public void upload() {
+  public void upload() throws IOException {
     uploadedFile.getFileName();
     uploadedFile.getContentType();
-    uploadedFile.getContents();
+    final byte[] content = uploadedFile.getContents();
+
 
     System.out.println("Uploaded File Name Is :: " + uploadedFile.getFileName()
         + " :: Uploaded File Size :: " + uploadedFile.getSize());
+
+    String targetPath = "D:\\Ravi";
+    String fileName = uploadedFile.getFileName();
+    fileName =
+        fileName.substring(fileName.lastIndexOf("/") + 1).substring(fileName.lastIndexOf("\\") + 1);
+
+    String newFilePath = targetPath + File.separator + fileName;
+    FileOutputStream out = new FileOutputStream(newFilePath);
+
+    int c;
+    for (int x = 0; x < content.length; x++) {
+      out.write(content[x]); // writes the bytes
+    }
+    out.close();
   }
 
   public void handleFileUpload(FileUploadEvent event) {
