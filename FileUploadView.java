@@ -3,8 +3,10 @@ package com.bean;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
@@ -44,7 +46,11 @@ public class FileUploadView {
     uploadedFile.getFileName();
     uploadedFile.getContentType();
     final byte[] content = uploadedFile.getContents();
-
+    FacesContext context = FacesContext.getCurrentInstance();
+    ResourceBundle bundle = context.getApplication().getResourceBundle(context, "uploadMsg");
+    String key = "upload.var.filename";
+    String message = bundle.getString(key);
+    System.out.println("value from property file--->" + message);
 
     System.out.println("Uploaded File Name Is :: " + uploadedFile.getFileName()
         + " :: Uploaded File Size :: " + uploadedFile.getSize());
