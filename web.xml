@@ -15,6 +15,10 @@
     <param-name>primefaces.UPLOADER</param-name>
     <param-value>commons</param-value>
   </context-param>
+   <context-param>
+       <param-name>javax.faces.application.CONFIG_FILES</param-name>
+       <param-value>/WEB-INF/faces-config.xml</param-value>
+ </context-param>
 	<!-- Welcome page -->
 	<welcome-file-list>
 		<welcome-file>faces/UploadFile.xhtml</welcome-file>
